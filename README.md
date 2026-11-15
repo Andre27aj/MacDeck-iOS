@@ -1,157 +1,109 @@
+<div align="center">
+
+<img src="MacDeck/Assets.xcassets/AppIcon.appiconset/AppIcon-1024.png" alt="MacDeck" width="128">
+
 # MacDeck iOS
 
-App native SwiftUI pour iPhone et iPad — transforme ton téléphone en StreamDeck pour contrôler ton Mac.
+**L'app SwiftUI qui transforme ton iPhone ou ton iPad en Stream Deck pour ton Mac.**
 
-![Platform](https://img.shields.io/badge/iOS-16%2B-blue) ![Platform](https://img.shields.io/badge/iPadOS-16%2B-blue) ![Swift](https://img.shields.io/badge/Swift-5.9-orange) ![License](https://img.shields.io/badge/license-MIT-green)
+<br>
 
----
+<img src="https://img.shields.io/badge/iOS_/_iPadOS-16+-007AFF?logo=apple&logoColor=white" alt="iOS 16+">
+<img src="https://img.shields.io/badge/Swift-5.9-F05138?logo=swift&logoColor=white" alt="Swift 5.9">
+<img src="https://img.shields.io/badge/SwiftUI-native-0A84FF" alt="SwiftUI">
+<img src="https://img.shields.io/badge/XcodeGen-project.yml-8B5CF6" alt="XcodeGen">
 
-## Écosystème MacDeck
-
-| Repo | Description | Plateforme |
-|------|-------------|------------|
-| [MacDeck](https://github.com/Andre27aj/MacDeck) | Serveur Mac + interface web | macOS |
-| **MacDeck-iOS** *(ce repo)* | App native Swift | iPhone / iPad |
-| [MacDeck-Windows](https://github.com/Andre27aj/MacDeck-Windows) | Serveur Windows + interface web | Windows |
+</div>
 
 ---
 
-## Fonctionnalités
+> [!WARNING]
+> **Ce dépôt contient la première version de l'app.** La version à jour se trouve dans le dossier [`ios/` du dépôt MacDeck](https://github.com/Andre27aj/MacDeck/tree/master/ios). Elle ajoute le **jumelage par code**, les **boutons URL** et les sections **Base / En cours**.
+>
+> Le serveur MacDeck actuel exige un token de jumelage, que cette version n'envoie pas : **utilise `MacDeck/ios`** pour une installation neuve.
 
-- **Découverte automatique** — trouve le Mac sur le réseau via Bonjour, sans entrer d'IP
-- **Volume & luminosité** — sliders verticaux tactiles, précis
-- **Mute** son et micro indépendamment avec feedback visuel
-- **Médias** — play/pause, piste suivante/précédente, titre et artiste en cours
-- **Grille d'apps personnalisable** — lance n'importe quelle app macOS en un tap, bordure verte si l'app est déjà ouverte
-- **Page Système** — 11 actions : verrouiller, veille écran, capture d'écran, mode sombre, Mission Control, Ne pas déranger, veille Mac, corbeille, Spotlight, Cmd+Tab, Cmd+Q
-- **Profils automatiques** — les raccourcis changent automatiquement selon l'app active sur le Mac (Figma, Xcode, Safari…)
-- **Batterie Mac** — affichée en haut à gauche en temps réel
-- **Feedback haptique** — vibration à chaque action
-- **Portrait & paysage** — layout adaptatif pour iPhone et iPad
-- **Thème sombre** — interface indigo/violet sur fond noir
+## 🧩 L'écosystème
 
----
+| Dépôt | Contenu | Pour |
+|---|---|---|
+| [MacDeck](https://github.com/Andre27aj/MacDeck) | Serveur Mac, PWA et **app iOS à jour** (`ios/`) | macOS + tous les clients |
+| **MacDeck-iOS** *(ici)* | Première version de l'app iOS | iPhone / iPad |
+| [MacDeck-Windows](https://github.com/Andre27aj/MacDeck-Windows) | Serveur équivalent pour PC | Windows 10/11 |
 
-## Prérequis
+## ✨ Fonctionnalités
 
-| Côté Mac | Côté iPhone/iPad |
-|----------|-----------------|
-| macOS 12+ | iOS / iPadOS 16+ |
-| [MacDeck serveur](https://github.com/Andre27aj/MacDeck) lancé | Xcode 15+ pour installer |
-| Node.js 18+ | Même réseau Wi-Fi que le Mac |
+| | |
+|---|---|
+| 📡 **Découverte automatique** | Trouve le Mac via Bonjour, sans saisir d'IP |
+| 🎚️ **Volume et luminosité** | Sliders verticaux tactiles |
+| 🔇 **Mute** | Son et micro séparément, avec retour visuel |
+| ⏯️ **Médias** | Lecture/pause, suivant/précédent, titre et artiste en cours |
+| 🚀 **Grille d'apps** | Lance n'importe quelle app en un tap ; contour vert si elle est déjà ouverte |
+| ⚙️ **Page Système** | Verrouiller, veille écran, capture, mode sombre, Mission Control, Ne pas déranger, veille, corbeille, Spotlight, Cmd+Tab, Cmd+Q |
+| 🧠 **Profils automatiques** | Les raccourcis s'adaptent à l'app active (Figma, Xcode, Safari) |
+| 🔋 **Batterie du Mac** | Affichée en temps réel |
+| 📳 **Retour haptique** | Une vibration à chaque action |
+| 📐 **Portrait et paysage** | Mise en page adaptée à l'iPhone et à l'iPad |
 
----
+## 🚀 Installation
 
-## Installation
+**Côté Mac :** lance le serveur [MacDeck](https://github.com/Andre27aj/MacDeck) (`npm install && npm start`).
 
-### 1 — Lancer le serveur Mac
-
-```bash
-git clone https://github.com/Andre27aj/MacDeck.git
-cd MacDeck
-npm install
-npm start
-```
-
-### 2 — Installer l'app iOS
+**Côté iPhone / iPad :**
 
 ```bash
 git clone https://github.com/Andre27aj/MacDeck-iOS.git
 cd MacDeck-iOS
-
-# Générer le projet Xcode (nécessite xcodegen)
 brew install xcodegen
 xcodegen generate
+open MacDeck.xcodeproj
 ```
 
-Ouvre `MacDeck.xcodeproj` dans Xcode :
+1. Branche ton iPhone ou ton iPad et sélectionne-le comme destination.
+2. Dans *Signing & Capabilities*, choisis ton **Team**. Un compte Apple gratuit suffit pour installer sur tes propres appareils.
+3. Lance avec **⌘R**.
 
-1. Connecte ton iPhone ou iPad au Mac via USB
-2. Sélectionne ton appareil comme destination en haut de Xcode
-3. Dans *Signing & Capabilities*, change le **Team** pour ton compte Apple (gratuit suffit)
-4. Appuie sur **⌘R** pour compiler et installer
+Si Bonjour ne trouve pas le Mac (réseaux séparés, VPN…), touche ⚙️ et entre son IP à la main.
 
-> Pas besoin d'un compte Apple Developer payant. Un compte gratuit permet d'installer sur tes propres appareils.
+## 🎛️ Utilisation
 
-### Alternative — Xcode en ligne de commande
+- **Changer de page** : balaie vers la gauche ou la droite, ou touche les onglets **Apps** / **Système**.
+- **Personnaliser la grille** (✏️) : nom affiché, nom exact de l'app macOS (`Figma`, `Google Chrome`…) et icône SF Symbol de secours.
 
-```bash
-xcodegen generate
-xcodebuild -scheme MacDeck -destination 'id=<UDID-de-ton-iphone>' build
+## 🏗️ Comment ça marche
+
+```
+iPhone / iPad (SwiftUI)  ── HTTP ──▶  Mac (serveur Node.js, port 3000)  ── osascript / pmset ──▶  macOS
 ```
 
----
+L'app interroge `/system/status` toutes les 5 secondes pour rester synchronisée. Chaque bouton envoie une requête `POST`.
 
-## Utilisation
-
-1. Lance le serveur Mac (`npm start` dans le repo MacDeck)
-2. Ouvre **MacDeck** sur ton iPhone ou iPad
-3. L'app trouve le Mac automatiquement via Bonjour
-4. Si la connexion échoue (réseaux séparés, VPN…), tape l'icône ⚙️ et entre l'IP manuellement
-
-### Personnaliser les apps
-
-Tape l'icône ✏️ dans la grille pour modifier la liste d'apps :
-- **Nom affiché** — ce qui apparaît sous le bouton
-- **Nom de lancement** — le nom macOS exact de l'app (ex: `Figma`, `Slack`, `Google Chrome`)
-- **Icône SF Symbol** — fallback si l'icône de l'app n'est pas trouvée
-
-### Changer de page
-
-Swipe gauche/droite ou utilise les onglets **Apps** / **Système** en haut de la grille.
-
----
-
-## Structure du projet
+## 🗂️ Structure
 
 ```
 MacDeck-iOS/
-├── project.yml                    # Config xcodegen (génère le .xcodeproj)
+├── project.yml               # Spec XcodeGen (génère le .xcodeproj)
 └── MacDeck/
-    ├── ContentView.swift          # Layout principal, détection orientation
-    ├── LeftPanel.swift            # Volume, luminosité, médias, mute
-    ├── DeckGrid.swift             # Grille d'apps + boutons fixes
-    ├── PagedDeckView.swift        # Onglets Apps / Système avec swipe
-    ├── SystemPage.swift           # Page des 11 actions système
-    ├── AppEditorView.swift        # Éditeur de la grille d'apps
-    ├── MutePanel.swift            # Boutons mute micro/son
-    ├── ViewModel.swift            # État global & appels API
-    ├── APIClient.swift            # Client HTTP + modèles de données
-    ├── AppProfiles.swift          # Profils par app (Figma, Xcode, Safari)
-    ├── AppProfilePage.swift       # Page des raccourcis du profil actif
-    ├── ServiceDiscovery.swift     # Bonjour / mDNS auto-discovery
-    └── Assets.xcassets/           # Icônes et couleurs
+    ├── MacDeckApp.swift      # Point d'entrée
+    ├── ContentView.swift     # Mise en page, orientation
+    ├── LeftPanel.swift       # Volume, luminosité, médias
+    ├── MutePanel.swift       # Mute son / micro
+    ├── DeckGrid.swift        # Grille d'apps
+    ├── PagedDeckView.swift   # Onglets Apps / Système + swipe
+    ├── SystemPage.swift      # Actions système
+    ├── AppEditorView.swift   # Éditeur de la grille
+    ├── AppProfiles.swift     # Profils par app
+    ├── AppProfilePage.swift  # Raccourcis du profil actif
+    ├── ViewModel.swift       # État global
+    ├── APIClient.swift       # Client HTTP + modèles
+    └── ServiceDiscovery.swift# Bonjour / mDNS
 ```
 
----
+## ⚠️ Limitations
 
-## Comment ça fonctionne
+- L'iPhone et le Mac doivent être sur le **même réseau local**.
+- L'app s'installe via Xcode : elle n'est pas sur l'App Store.
 
-```
-iPhone (SwiftUI)  ──HTTP──▶  Mac (Node.js serveur)  ──osascript/shell──▶  macOS
-```
+## 📄 Licence
 
-1. Le serveur Mac expose une API REST sur le port 3000
-2. L'app iOS interroge `/system/status` toutes les 5 secondes pour synchroniser l'état
-3. Chaque bouton envoie une requête POST à l'endpoint correspondant
-4. Le serveur exécute la commande macOS (osascript, AppleScript, pmset…)
-
----
-
-## Différence avec la PWA
-
-L'app iOS native offre :
-- **Bonjour auto-discovery** — pas besoin d'entrer l'IP manuellement
-- **Feedback haptique** — vibration à chaque tap
-- **Gestures natives** — swipe, scroll SwiftUI
-- **Meilleure performance** — pas de délai navigateur
-
-La PWA ([incluse dans le repo Mac](https://github.com/Andre27aj/MacDeck)) fonctionne sur Android, Windows, et tout navigateur — pratique si tu n'as pas Xcode.
-
----
-
-## Limitations
-
-- iPhone/iPad et Mac doivent être sur le **même réseau local**
-- L'app doit être compilée avec Xcode (pas sur l'App Store)
-- iOS 16+ requis
+MIT, voir [LICENSE](LICENSE).
